@@ -1,0 +1,22 @@
+package com.littlemonkey.web.request;
+
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.io.Serializable;
+
+/**
+ * @Author: xls
+ * @Description:
+ * @Date: Created in 0:32 2018/3/28
+ * @Version: 1.0
+ */
+public interface RequestBody extends Serializable {
+
+    String getServiceName();
+
+    String getMethodName();
+
+    String getContent();
+
+    RequestMethod getRequestMethod();
+}
