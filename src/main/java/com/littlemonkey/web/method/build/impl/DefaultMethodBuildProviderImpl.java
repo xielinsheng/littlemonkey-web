@@ -9,6 +9,7 @@ import com.littlemonkey.web.method.MethodParameter;
 import com.littlemonkey.web.method.build.MethodBuildProvider;
 import com.littlemonkey.web.method.resolver.WebHandlerMethodArgResolver;
 import com.littlemonkey.web.param.RequestDetail;
+import com.littlemonkey.web.request.DefaultRequestBody;
 import com.littlemonkey.web.request.RequestBody;
 import org.springframework.stereotype.Component;
 
@@ -20,25 +21,9 @@ public class DefaultMethodBuildProviderImpl implements MethodBuildProvider {
     @Override
     public Object[] buildParams(RequestDetail requestDetail) {
         MethodDetail methodDetail = requestDetail.getTargetMethodDetail();
-        RequestBody requestBody = requestDetail.getRequestBody();
-        String[] beanNames = SpringContextHolder.getBeanNamesForType(WebHandlerMethodArgResolver.class);
+        DefaultRequestBody defaultRequestBody = (DefaultRequestBody) requestDetail.getRequestBody();
         List<Object> params = Lists.newArrayListWithCapacity(methodDetail.getMethod().getParameterTypes().length);
-        methodDetail.getParamDetailMap().forEach(new BiConsumer<String, GenericType>() {
-            @Override
-            public void accept(String paramName, GenericType genericType) {
-                MethodParameter methodParameter = new MethodParameter();
-                methodParameter.setGenericType(genericType);
-                methodParameter.setParameterName(paramName);
-                methodParameter.setRequestMethod(requestDetail.getRequestMethodType());
-                for (String beanName : beanNames) {
-                    WebHandlerMethodArgResolver webHandlerMethodArgResolver = SpringContextHolder.getBean(beanName);
-                    if (webHandlerMethodArgResolver.supportsParameter(methodDetail)) {
-                        params.add(webHandlerMethodArgResolver.resolveArgument(methodParameter, requestBody.getContent()));
-                        break;
-                    }
-                }
-            }
-        });
+        this.resolve(requestDetail, methodDetail, defaultRequestBody, params);
         return params.toArray();
     }
 }

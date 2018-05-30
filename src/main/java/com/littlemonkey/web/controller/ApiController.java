@@ -80,7 +80,7 @@ public class ApiController extends BaseController {
      * @param serviceName
      * @param methodName
      */
-    @GetMapping(value = "/{serviceName}/{methodName}")
+    @GetMapping(value = "/{serviceName}/{methodName}.other")
     public void otherGet(@PathVariable(name = "serviceName") String serviceName, @PathVariable(name = "methodName") String methodName) {
         DefaultRequestBody defaultRequestBody = new DefaultRequestBody(serviceName, methodName,
                 WebUtils2.getQueryString(CurrentHttpServletHolder.getCurrentRequest()));
@@ -93,7 +93,7 @@ public class ApiController extends BaseController {
      * @param serviceName
      * @param methodName
      */
-    @PostMapping(value = "/{serviceName}/{methodName}", consumes = "application/json")
+    @PostMapping(value = "/{serviceName}/{methodName}.other", consumes = "application/json")
     public void otherPost(@PathVariable(name = "serviceName") String serviceName, @PathVariable(name = "methodName") String methodName) {
         DefaultRequestBody defaultRequestBody = new DefaultRequestBody(serviceName, methodName,
                 WebUtils2.getRequestBodyJson(CurrentHttpServletHolder.getCurrentRequest()));

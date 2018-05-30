@@ -36,6 +36,10 @@ public class RestfulRequestBody extends DefaultRequestBody {
         this.id = id;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "RestfulRequestBody{" +

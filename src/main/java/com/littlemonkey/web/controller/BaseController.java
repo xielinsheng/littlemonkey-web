@@ -45,6 +45,7 @@ public class BaseController {
         Answer answer = new Answer();
         answer.setServiceName(body.getServiceName());
         answer.setMethodName(body.getMethodName());
+        logger.info("request body: {}", body);
         try {
             Assert.notNull(answer.getServiceName(), "serviceName is null.");
             Assert.notNull(answer.getMethodName(), "methodName is null.");
