@@ -1,7 +1,5 @@
 package com.littlemonkey.web.request;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import java.io.Serializable;
 
 /**
@@ -18,5 +16,4 @@ public interface RequestBody extends Serializable {
 
     String getContent();
 
-    RequestMethod getRequestMethod();
 }

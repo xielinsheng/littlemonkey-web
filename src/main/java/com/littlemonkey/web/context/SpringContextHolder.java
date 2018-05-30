@@ -1,9 +1,12 @@
 package com.littlemonkey.web.context;
 
+import com.littlemonkey.web.annotation.MethodBuildClass;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+
+import java.lang.annotation.Annotation;
 
 @Component
 public final class SpringContextHolder implements ApplicationContextAware {
@@ -44,5 +47,13 @@ public final class SpringContextHolder implements ApplicationContextAware {
      */
     public static Class<?> getType(String beanName) {
         return applicationContext.getType(beanName);
+    }
+
+    public static <T> T getBean(Class<T> requiredType) {
+        return applicationContext.getBean(requiredType);
+    }
+
+    public static String[] getBeanNamesForAnnotation(Class<? extends Annotation> annotationType) {
+        return applicationContext.getBeanNamesForAnnotation(annotationType);
     }
 }

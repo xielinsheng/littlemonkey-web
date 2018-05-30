@@ -1,8 +1,7 @@
 package com.littlemonkey.web.request;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.io.Serializable;
+import com.littlemonkey.web.annotation.MethodBuildClass;
+import com.littlemonkey.web.method.build.impl.DefaultMethodBuildProviderImpl;
 
 /**
  * @Author: xls
@@ -10,26 +9,17 @@ import java.io.Serializable;
  * @Date: Created in 20:32 2018/4/3
  * @Version: 1.0
  */
+@MethodBuildClass
 public class DefaultRequestBody implements RequestBody {
 
-    private RequestMethod requestMethod;
-    private String serviceName;
-    private String methodName;
-    private String content;
+    protected String serviceName;
+    protected String methodName;
+    protected String content;
 
-    public DefaultRequestBody(String serviceName, String methodName) {
+    public DefaultRequestBody(String serviceName, String methodName, String content) {
         this.serviceName = serviceName;
         this.methodName = methodName;
-    }
-
-    public DefaultRequestBody setContent(String content) {
         this.content = content;
-        return this;
-    }
-
-    public DefaultRequestBody setRequestMethod(RequestMethod requestMethod) {
-        this.requestMethod = requestMethod;
-        return this;
     }
 
     @Override
@@ -47,10 +37,6 @@ public class DefaultRequestBody implements RequestBody {
         return this.content;
     }
 
-    @Override
-    public RequestMethod getRequestMethod() {
-        return this.requestMethod;
-    }
 
     @Override
     public String toString() {
