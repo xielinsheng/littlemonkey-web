@@ -2,7 +2,7 @@ package com.littlemonkey.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.littlemonkey.utils.reflection.ReflectionUtils2;
-import com.littlemonkey.web.annotation.MethodBuildClass;
+import com.littlemonkey.web.annotation.MethodBuildBind;
 import com.littlemonkey.web.context.CurrentHttpServletHolder;
 import com.littlemonkey.web.context.SpringContextHolder;
 import com.littlemonkey.web.method.MethodCacheHolder;
@@ -15,15 +15,12 @@ import com.littlemonkey.web.response.FileResponse;
 import com.littlemonkey.web.response.StringResponse;
 import com.littlemonkey.web.response.WorkBookResponse;
 import com.littlemonkey.web.utils.WebUtils2;
-import org.omg.CORBA.portable.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
@@ -54,8 +51,8 @@ public class BaseController {
                 throw new NoSuchBeanDefinitionException("");
             }
             RequestDetail requestDetail = new RequestDetail(requestMethod, body, methodDetail);
-            MethodBuildClass methodBuildClass = body.getClass().getAnnotation(MethodBuildClass.class);
-            MethodBuildProvider methodBuildProvider = SpringContextHolder.getBean((Class<MethodBuildProvider>) methodBuildClass.target());
+            MethodBuildBind methodBuildBind = body.getClass().getAnnotation(MethodBuildBind.class);
+            MethodBuildProvider methodBuildProvider = SpringContextHolder.getBean((Class<MethodBuildProvider>) methodBuildBind.target());
             Object[] params = methodBuildProvider.buildParams(requestDetail);
             Object result = ReflectionUtils2.invokeMethod(methodDetail.getMethod(), SpringContextHolder.getBean(body.getServiceName()), params);
         } catch (Exception e) {

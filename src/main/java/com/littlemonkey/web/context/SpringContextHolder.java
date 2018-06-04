@@ -1,6 +1,5 @@
 package com.littlemonkey.web.context;
 
-import com.littlemonkey.web.annotation.MethodBuildClass;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

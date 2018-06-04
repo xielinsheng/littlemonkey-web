@@ -8,6 +8,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface MethodBuildClass {
+public @interface MethodBuildBind {
     Class target() default DefaultMethodBuildProviderImpl.class;
 }

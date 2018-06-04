@@ -14,6 +14,8 @@ public interface RequestBody extends Serializable {
 
     String getMethodName();
 
+    String getQueryString();
+
     String getContent();
 
 }

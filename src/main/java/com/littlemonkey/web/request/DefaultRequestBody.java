@@ -1,7 +1,6 @@
 package com.littlemonkey.web.request;
 
-import com.littlemonkey.web.annotation.MethodBuildClass;
-import com.littlemonkey.web.method.build.impl.DefaultMethodBuildProviderImpl;
+import com.littlemonkey.web.annotation.MethodBuildBind;
 
 /**
  * @Author: xls
@@ -9,34 +8,56 @@ import com.littlemonkey.web.method.build.impl.DefaultMethodBuildProviderImpl;
  * @Date: Created in 20:32 2018/4/3
  * @Version: 1.0
  */
-@MethodBuildClass
+@MethodBuildBind
 public class DefaultRequestBody implements RequestBody {
 
-    protected String serviceName;
-    protected String methodName;
-    protected String content;
+    private String serviceName;
+    private String methodName;
+    private String content;
+    private String queryString;
 
-    public DefaultRequestBody(String serviceName, String methodName, String content) {
+    public DefaultRequestBody(String serviceName, String methodName, String content, String queryString) {
         this.serviceName = serviceName;
         this.methodName = methodName;
         this.content = content;
+        this.queryString = queryString;
     }
 
     @Override
     public String getServiceName() {
-        return this.serviceName;
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     @Override
     public String getMethodName() {
-        return this.methodName;
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
 
     @Override
     public String getContent() {
-        return this.content;
+        return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String getQueryString() {
+        return queryString;
+    }
+
+    public void setQueryString(String queryString) {
+        this.queryString = queryString;
+    }
 
     @Override
     public String toString() {
@@ -44,6 +65,7 @@ public class DefaultRequestBody implements RequestBody {
                 "serviceName='" + serviceName + '\'' +
                 ", methodName='" + methodName + '\'' +
                 ", content='" + content + '\'' +
+                ", queryString='" + queryString + '\'' +
                 '}';
     }
 }

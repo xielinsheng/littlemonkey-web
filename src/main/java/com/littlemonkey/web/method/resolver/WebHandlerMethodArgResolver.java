@@ -9,5 +9,5 @@ public interface WebHandlerMethodArgResolver {
 
     boolean supportsParameter(AnnotatedElement annotatedElement);
 
-    Object resolveArgument(MethodParameter methodParameter, String content);
+    Object resolveArgument(MethodParameter methodParameter, String queryString, String content);
 }
