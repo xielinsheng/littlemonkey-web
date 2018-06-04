@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -54,8 +56,10 @@ public class BaseController {
             MethodBuildBind methodBuildBind = body.getClass().getAnnotation(MethodBuildBind.class);
             MethodBuildProvider methodBuildProvider = SpringContextHolder.getBean((Class<MethodBuildProvider>) methodBuildBind.target());
             Object[] params = methodBuildProvider.buildParams(requestDetail);
+            logger.info("params: {}", Arrays.toString(params));
             Object result = ReflectionUtils2.invokeMethod(methodDetail.getMethod(), SpringContextHolder.getBean(body.getServiceName()), params);
         } catch (Exception e) {
+            throw e;
         }
         this.callBack(answer);
     }

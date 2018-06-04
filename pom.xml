@@ -6,7 +6,7 @@
     <artifactId>littlemonkey-web</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <description>Demo project for Spring Boot</description>
+    <description>Web project for Spring Boot</description>
     <parent>
         <groupId>com.littlemonkey.base</groupId>
         <artifactId>littlemonkey-base</artifactId>
